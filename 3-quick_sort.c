@@ -10,12 +10,13 @@
  */
 size_t lomuto_partition(int *arr, int low, int high, size_t size)
 {
-int i = low, tmp, j;
+int i = low - 1, tmp, j;
 
 for (j = low; j <= high - 1; j++)
 {
 if (arr[j] < arr[high])
 {
+i++;
 if (i < j)
 {
 tmp = arr[i];
@@ -23,18 +24,17 @@ arr[i] = arr[j];
 arr[j] = tmp;
 print_array(arr, size);
 }
-i++;
 }
 }
-if (arr[i] > arr[high])
+if (arr[i + 1] != arr[high])
 {
-tmp = arr[i];
-arr[i] = arr[high];
+tmp = arr[i + 1];
+arr[i + 1] = arr[high];
 arr[high] = tmp;
 print_array(arr, size);
 }
 
-return (i);
+return (i + 1);
 }
 /**
  * quick_sort_helper - sorts an array of integers in ascending order using
@@ -49,8 +49,8 @@ size_t pivot_index;
 if (low < high)
 {
 pivot_index = lomuto_partition(arr, low, high, size);
-quick_sort_helper(arr, pivot_index + 1, high, size);
 quick_sort_helper(arr, low, pivot_index - 1, size);
+quick_sort_helper(arr, pivot_index + 1, high, size);
 }
 }
 /**
