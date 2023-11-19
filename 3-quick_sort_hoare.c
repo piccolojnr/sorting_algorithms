@@ -1,14 +1,22 @@
 #include "sort.h"
-
-size_t hoare_partition(int *array, size_t size, size_t start, size_t end)
+/**
+ * hoare_partition - partitions the array using hoare partition scheme
+ * @array: array to be sorted
+ * @low: starting index of the array
+ * @high: ending index of the array
+ * @size: size of the array
+ *
+ * Return: index of the pivot
+ */
+size_t hoare_partition(int *array, size_t size, size_t low, size_t high)
 {
 size_t curr_indx, cmp_indx, count;
 int curr, cmp, tmp, direction = 0;
-curr_indx = start;
+curr_indx = low;
 curr = array[curr_indx];
-cmp_indx = end;
+cmp_indx = high;
 count = 0;
-while (start != end)
+while (low != high)
 {
 cmp = array[cmp_indx];
 if ((!direction && curr > cmp) || (direction && cmp > curr))
@@ -28,28 +36,38 @@ if (direction)
 cmp_indx++;
 else
 cmp_indx--;
-if (count == end - start)
+if (count == high - low)
 break;
 count++;
 }
 print_array(array, size);
 return (curr_indx);
 }
-
-void quick_sort_helper(int *array, size_t size, size_t start, size_t end)
+/**
+ * quick_sort_helper - sorts an array of integers in ascending order using
+ * @array: array to be sorted
+ * @low: starting index of the array
+ * @high: ending index of the array
+ * @size: size of the array
+ */
+void quick_sort_helper(int *array, size_t size, size_t low, size_t high)
 {
 size_t partition, i;
-for (i = start; i < end; i++)
+for (i = low; i < high; i++)
 {
-partition = hoare_partition(array, size, i, end - 1);
-if (partition != start)
+partition = hoare_partition(array, size, i, high - 1);
+if (partition != low)
 {
-quick_sort_helper(array, size, start, partition);
-start = partition + 1;
+quick_sort_helper(array, size, low, partition);
+low = partition + 1;
 }
 }
 }
-
+/**
+ * quick_sort - sorts an array of integers in ascending order using the
+ * @array: array to be sorted
+ * @size: size of the array
+ */
 void quick_sort(int *array, size_t size)
 {
 if (array == NULL || size < 2)
