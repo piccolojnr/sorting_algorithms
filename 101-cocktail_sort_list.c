@@ -29,7 +29,8 @@ void cocktail_sort_list(listint_t **list)
 listint_t *curr, *tmp1, *tmp2;
 int swapped = 1;
 
-if (list == NULL || *list == NULL || (*list)->next == NULL)return;
+if (list == NULL || *list == NULL || (*list)->next == NULL)
+return;
 
 while (swapped)
 {
