@@ -57,11 +57,14 @@ return;
 get_max(array, size, &max);
 range = max + 1;
 count = (int *)malloc(range *sizeof(int));
+if (count == NULL)
+{
+return;
+}
 output = (int *)malloc(size * sizeof(int));
-if (count == NULL || output == NULL)
+if (output == NULL)
 {
 free(count);
-free(output);
 return;
 }
 get_count(array, size, count, range);
