@@ -1,23 +1,7 @@
 #include "sort.h"
-void copy_array(int *arr, size_t begin, size_t end, int *buffer);
 void top_down_split_merge(int *arr, size_t begin, size_t end, int *buffer);
 void top_down_merge(int *buffer, size_t begin,
 size_t middle, size_t end, int *arr);
-
-/**
- * copy_array - copies an array
- * @arr: array to copy
- * @begin: beginning of the array
- * @end: end of the array
- * @buffer: buffer to store the copy
-*/
-void copy_array(int *arr, size_t begin, size_t end, int *buffer)
-{
-size_t i;
-
-for (i = begin; i < end; i++)
-buffer[i] = arr[i];
-}
 
 /**
  * top_down_split_merge - splits and merges an array
@@ -88,11 +72,13 @@ void merge_sort(int *array, size_t size)
 {
 int *buffer;
 
+if (array == NULL || size < 2)
+return;
+
 buffer = malloc(size * sizeof(int));
 if (buffer == NULL)
 return;
 
-copy_array(array, 0, size, buffer);
 top_down_split_merge(array, 0, size, buffer);
 
 free(buffer);

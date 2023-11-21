@@ -51,10 +51,9 @@ int max = array[0];
 size_t range;
 int *count, *output;
 if (array == NULL || size < 2)
-{
 return;
-}
-get_max(array, size, &max);
+
+    get_max(array, size, &max);
 range = max + 1;
 count = (int *)malloc(range *sizeof(int));
 if (count == NULL)
