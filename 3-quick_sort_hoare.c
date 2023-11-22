@@ -10,38 +10,40 @@
  */
 size_t hoare_partition(int *array, size_t size, size_t low, size_t high)
 {
-size_t curr_indx, cmp_indx, count;
-int curr, cmp, tmp, direction = 0;
-curr_indx = low;
-curr = array[curr_indx];
-cmp_indx = high;
-count = 0;
-while (low != high)
-{
-cmp = array[cmp_indx];
-if ((!direction && curr > cmp) || (direction && cmp > curr))
-{
-tmp = array[curr_indx];
-array[curr_indx] = array[cmp_indx];
-array[cmp_indx] = tmp;
-tmp = curr_indx;
-curr_indx = cmp_indx;
-cmp_indx = tmp;
-if (direction)
-direction = 0;
-else
-direction = 1;
-}
-if (direction)
-cmp_indx++;
-else
-cmp_indx--;
-if (count == high - low)
-break;
-count++;
-}
-print_array(array, size);
-return (curr_indx);
+    size_t curr_indx, cmp_indx, count;
+    int curr, cmp, tmp, direction = 0;
+
+    curr_indx = low;
+    curr = array[curr_indx];
+    cmp_indx = high;
+
+    count = 0;
+    while (low != high)
+    {
+        cmp = array[cmp_indx];
+        if ((!direction && curr > cmp) || (direction && cmp > curr))
+        {
+            tmp = array[curr_indx];
+            array[curr_indx] = array[cmp_indx];
+            array[cmp_indx] = tmp;
+            tmp = curr_indx;
+            curr_indx = cmp_indx;
+            cmp_indx = tmp;
+            if (direction)
+                direction = 0;
+            else
+                direction = 1;
+        }
+        if (direction)
+            cmp_indx++;
+        else
+            cmp_indx--;
+        if (count == high - low)
+            break;
+        count++;
+    }
+    print_array(array, size);
+    return (curr_indx);
 }
 /**
  * quick_sort_helper - sorts an array of integers in ascending order using
@@ -52,16 +54,16 @@ return (curr_indx);
  */
 void quick_sort_helper(int *array, size_t size, size_t low, size_t high)
 {
-size_t partition, i;
-for (i = low; i < high; i++)
-{
-partition = hoare_partition(array, size, i, high - 1);
-if (partition != low)
-{
-quick_sort_helper(array, size, low, partition);
-low = partition + 1;
-}
-}
+    size_t partition, i;
+    for (i = low; i < high; i++)
+    {
+        partition = hoare_partition(array, size, i, high - 1);
+        if (partition != low)
+        {
+            quick_sort_helper(array, size, low, partition);
+            low = partition + 1;
+        }
+    }
 }
 /**
  * quick_sort - sorts an array of integers in ascending order using the
@@ -70,7 +72,7 @@ low = partition + 1;
  */
 void quick_sort(int *array, size_t size)
 {
-if (array == NULL || size < 2)
-return;
-quick_sort_helper(array, size, 0, size);
+    if (array == NULL || size < 2)
+        return;
+    quick_sort_helper(array, size, 0, size);
 }
