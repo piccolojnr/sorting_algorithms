@@ -24,10 +24,11 @@ if (!tmp1->prev)
  */
 void insertion_sort_list(listint_t **list)
 {
-listint_t *current = *list;
+listint_t *current;
 listint_t *tmp1, *tmp2, *tmp3;
 if (list == NULL || *list == NULL || (*list)->next == NULL)
 return;
+current = *list;
 while (current)
 {
 tmp2 = current->prev;

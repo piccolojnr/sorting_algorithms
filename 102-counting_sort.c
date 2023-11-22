@@ -47,11 +47,13 @@ count[k] += count[k - 1];
 void counting_sort(int *array, size_t size)
 {
 size_t i, j;
-int max = array[0];
+int max;
 size_t range;
 int *count, *output;
 if (array == NULL || size < 2)
 return;
+
+max = array[0];
 
 get_max(array, size, &max);
 range = max + 1;
